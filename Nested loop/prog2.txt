@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    char ip[50];
+
+    
+    printf("Enter the input string: ");
+    scanf("%s", ip);
+
+  
+    for (int i = 0; ip[i] != '\0'; i++) {
+        char curchar = ip[i];
+        int count = 0;
+
+       
+        while (ip[i + 1] >= '0' && ip[i + 1] <= '9') {
+            count = count * 10 + (ip[i + 1] - '0');
+            i++;
+        }
+
+     
+        for (int j = 0; j < count; j++) {
+            printf("%c", curchar);
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}
