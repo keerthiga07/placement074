@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    char shape;
+    double size;
+
+  
+    printf("Enter the shape ('S' for Square, 'C' for Circle): ");
+    scanf(" %c", &shape);
+
+    printf("Enter the size: ");
+    scanf("%lf", &size);
+
+ 
+    if (shape == 'S') {
+        double areaSquare = size * size;
+        printf("Area of Square = %lf\n", areaSquare);
+    } else if (shape == 'C') {
+        double areaCircle = 3.14*size*size; 
+       
+        printf("Area of Circle = %lf\n", areaCircle);
+    } else {
+        printf("Invalid shape!\n");
+    }
+
+    return 0;
+}
