@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int digits[100]; 
+    int digitsSize;
+
+  
+    printf("Enter the number of digits: ");
+    scanf("%d", &digitsSize);
+
+  
+    printf("Enter the digits (from most significant to least significant): ");
+    for (int i = 0; i < digitsSize; i++) {
+        scanf("%d", &digits[i]);
+    }
+
+
+    int carry = 1;
+
+   
+    for (int i = digitsSize - 1; i >= 0; i--) {
+        int sum = digits[i] + carry;
+        digits[i] = sum % 10;
+        carry = sum / 10;
+
+    
+        if (carry == 0) {
+            break;
+        }
+    }
+
+
+    if (carry > 0) {
+ 
+        printf("Output: [ %d", carry);
+        // Print the remaining digits
+        for (int i = 0; i < digitsSize; i++) {
+            printf(", %d", digits[i]);
+        }
+        printf(" ]\n");
+    } else {
+       
+        printf("Output: [");
+        for (int i = 0; i < digitsSize; i++) {
+            printf("%d", digits[i]);
+            if (i < digitsSize - 1) {
+                printf(",");
+            }
+        }
+        printf("]\n");
+    }
+
+    return 0;
+}
