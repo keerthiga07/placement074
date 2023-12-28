@@ -1,0 +1,75 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class CustomPartition {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        
+        System.out.print("Enter elements of the array separated by spaces: ");
+        String[] inputArray = scanner.nextLine().split(" ");
+        List<Integer> arr = new ArrayList<>();
+        for (String element : inputArray) {
+            arr.add(Integer.parseInt(element));
+        }
+
+        System.out.print("Enter the partition size: ");
+        int partitionSize = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        System.out.print("Enter the partition order separated by spaces: ");
+        String[] inputOrder = scanner.nextLine().split(" ");
+        List<Integer> partitionOrder = new ArrayList<>();
+        for (String order : inputOrder) {
+            partitionOrder.add(Integer.parseInt(order));
+        }
+
+       
+        List<List<Integer>> partitions = new ArrayList<>();
+        for (int i = 0; i < arr.size(); i += partitionSize) {
+            partitions.add(new ArrayList<>(arr.subList(i, Math.min(i + partitionSize, arr.size()))));
+        }
+
+       
+        List<Pair<Integer, List<Integer>>> partitionTuples = new ArrayList<>();
+        for (int i = 0; i < partitions.size(); i++) {
+            partitionTuples.add(new Pair<>(i + 1, partitions.get(i)));
+        }
+
+       
+        Collections.sort(partitionTuples, (a, b) -> Integer.compare(partitionOrder.indexOf(a.getFirst()), partitionOrder.indexOf(b.getFirst())));
+
+        
+        List<Integer> output = new ArrayList<>();
+        for (Pair<Integer, List<Integer>> tuple : partitionTuples) {
+            output.addAll(tuple.getSecond());
+        }
+
+      
+        System.out.println("Result after custom partition: " + output);
+
+       
+    }
+
+    
+    static class Pair<T, U> {
+        private final T first;
+        private final U second;
+
+        public Pair(T first, U second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        public T getFirst() {
+            return first;
+        }
+
+        public U getSecond() {
+            return second;
+        }
+    }
+}
