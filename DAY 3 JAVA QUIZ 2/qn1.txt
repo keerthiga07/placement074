@@ -1,0 +1,30 @@
+public class ConstructorExample {
+    private int num;
+    private String msg;
+
+   
+    public ConstEx() {
+        System.out.println("No arguments constructor called.");
+    }
+
+    
+    public ConstEx(int num) {
+        this.num = num;
+        this.msg = "Default message";
+        System.out.println("Default constructor called with number: " + num);
+    }
+
+    
+    public ConstEx(int num, String msg) {
+        this.num = num;
+        this.msg = msg;
+        System.out.println("Parameterized constructor called with number: " + num + " and message: " + msg);
+    }
+
+    public static void main(String[] args) {
+       
+        ConstEx obj1 = new ConstructorExample();
+        ConstEx obj2 = new ConstructorExample(42);
+        ConstEx obj3 = new ConstructorExample(99, "Custom Message");
+    }
+}

@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class remove {
+
+    public static int remove(int[] num) {
+        if (num == null || num.length == 0) {
+            return 0;
+        }
+
+        int unicount = 1; 
+
+        for (int i = 1; i < num.length; i++) {
+            if (num[i] != num[i - 1]) {
+                num[unicount] = num[i];
+                unicount++;
+            }
+        }
+
+        return unicount;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
+
+        int[] num = new int[n];
+
+        System.out.println("Enter elements of the array (sorted):");
+        for (int i = 0; i < n; i++) {
+            num[i] = scanner.nextInt();
+        }
+
+        int unicount = remove(num);
+
+        System.out.println("After removing duplicates: ");
+        for (int i = 0; i < unicount; i++) {
+            System.out.print(num[i] + " ");
+        }
+
+        System.out.println("\nNumber of unique elements: " + unicount);
+
+    }
+}
