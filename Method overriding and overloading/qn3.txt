@@ -1,0 +1,72 @@
+class Vehicle {
+    private double speed; 
+
+    public Vehicle(double speed) {
+        this.speed = speed;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double calculateSpeed() {
+        return speed; 
+    }
+}
+
+class Car extends Vehicle {
+    private int numPassengers;
+
+    public Car(double speed, int numPassn) {
+        super(speed);
+        this.numPassn = numPassn;
+    }
+
+    @Override
+    public double calculateSpeed() {
+       
+        return super.calculateSpeed() * numPassn;
+    }
+}
+
+class Motorcycle extends Vehicle {
+    private int numWheels;
+
+    public Motorcycle(double speed, int numWheels) {
+        super(speed);
+        this.numWheels = numWheels;
+    }
+
+    @Override
+    public double calculateSpeed() {
+       
+        return super.calculateSpeed() * numWheels;
+    }
+}
+
+public class VehicleTest {
+    public static void main(String[] args) {
+       
+        Car car = new Car(120, 4);
+        Motorcycle mc = new Motorcycle(150, 2);
+
+       
+        double carSpeed = car.calculateSpeed();
+        double cycleSpeed = mc.calculateSpeed();
+
+        
+        String fastVehicle;
+        if (carSpeed > cycleSpeed) {
+            fastVehicle = "Car";
+        } else if (carSpeed < cycleSpeed) {
+            fastVehicle = "Motorcycle";
+        } else {
+            fastVehicle = "Both vehicles have the same effective speed.";
+        }
+
+        
+        System.out.println("Car Speed: " + carSpeed);
+        System.out.println("Motorcycle Speed: " + cycleSpeed);
+        System.out.println("The vehicle with the highest effective speed is: " + fastVehicle);
+    }
+}

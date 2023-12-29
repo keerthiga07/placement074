@@ -1,0 +1,25 @@
+public class Calculator {
+
+   
+    public int mult(int a, int b) {
+        return a * b;
+    }
+
+  
+    public double mult(double x, double y, double z) {
+        return x * y * z;
+    }
+
+    public static void main(String[] args) {
+       
+        Calculator calc = new Calculator();
+
+        
+        int res1 = calc.mult(5, 3);
+        System.out.println("Multiplication of two integers: " + res1);
+
+    
+        double res2 = calc.mult(2.5, 3.0, 1.5);
+        System.out.println("Multiplication of three doubles: " + res2);
+    }
+}
