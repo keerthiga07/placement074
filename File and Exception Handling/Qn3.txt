@@ -1,0 +1,46 @@
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.*;
+import java.util.stream.*;
+
+public class MostCommonWordFinder {
+
+    public static void main(String[] args) {
+       
+        System.out.print("Enter directory name: ");
+        String directoryPath = new Scanner(System.in).nextLine();
+
+        
+        Map<String, Long> wordFrequencyMap = findMostCommonWord(directoryPath);
+
+        
+        System.out.println("Most common words and their frequencies:");
+        wordFrequencyMap.forEach((word, frequency) ->
+                System.out.println("Word: " + word + ", Frequency: " + frequency));
+    }
+
+    private static Map<String, Long> findMostCommonWord(String directoryPath) {
+        try {
+            return Files.list(Paths.get(directoryPath))
+                    .filter(path -> path.toString().endsWith(".txt"))
+                    .flatMap(MostCommonWordFinder::readWordsFromFile)
+                    .collect(Collectors.groupingBy(String::toLowerCase, Collectors.counting()))
+                    .entrySet().stream()
+                    .collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.mapping(Map.Entry::getKey, Collectors.toList())))
+                    .lastEntry().getValue().stream()
+                    .collect(Collectors.toMap(w -> w, word -> wordFrequencyMap.get(word)));
+        } catch (IOException e) {
+            System.err.println("Error reading files in the directory: " + e.getMessage());
+            return Collections.emptyMap();
+        }
+    }
+
+    private static Stream<String> readWordsFromFile(Path filePath) {
+        try {
+            return Files.lines(filePath).flatMap(line -> Arrays.stream(line.split("\\s+")));
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + filePath.getFileName());
+            return Stream.empty();
+        }
+    }
+}
