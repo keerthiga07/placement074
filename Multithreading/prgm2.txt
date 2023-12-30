@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+class numprint implements Runnable {
+    private int N;
+
+    public numprint(int N) {
+        this.N = N;
+    }
+
+    public void run() {
+        for (int i = 1; i <= N; i++) {
+            System.out.print(i + " ");
+        }
+    }
+}
+
+public class NaturalNumber {
+    public static void main(String[] args) {
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the value of N: ");
+        int N = scanner.nextInt();
+
+        
+        Thread thread1 = new Thread(new numprint(N));
+        Thread thread2 = new Thread(new numprint(N));
+
+        
+        thread1.start();
+        thread2.start();
+        
+        try {
+            
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted");
+        }
+    }
+}
